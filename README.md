@@ -7,8 +7,7 @@ foco no backend (java), portanto, ainda não há drag and drop dos itens dentro 
 > para lidar com versões das ferramentas, bibliotecas e frameworks.
 
 ## :zap: A elaboração :zap: 
-### 🔸 Semelhante ao primeiro projeto, migrando os controllers para o modelo Spring, alterando os formulários nos JSP para Spring Form e mantendo o 
-restante do projeto 🔸
+### 🔸 Semelhante ao primeiro projeto, migrando os controllers para o modelo Spring, alterando os formulários nos JSP para Spring Form e mantendo o restante do projeto 🔸
 
 ## :zap: O projeto :zap:
 ### Descrição do projeto
