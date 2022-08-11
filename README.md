@@ -57,4 +57,4 @@ aplicação. (a adicionar)
 ### Modelo Relacional (Diagrama Entidade - Relacionamento/ER)
 A partir dos requisitos definidos anteriormente, foram gerados os diagramas relacional e lógico, conforme pode ser visto abaixo
 
-![img](./poow1.jpg)
+![img](./poow1-2.jpg)
