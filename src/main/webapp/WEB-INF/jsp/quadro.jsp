@@ -55,6 +55,9 @@
                         </svg>
                         Nova coluna
                     </a>
+                    <!--<a href="/promanager/usuario/etiquetas/quadro/${quadro.id}/etiquetas" class="btn btn-info btn-sm">
+                        Gerenciar etiquetas
+                    </a>-->
                 </div>
             </div>
             <div class="card-body m-0">

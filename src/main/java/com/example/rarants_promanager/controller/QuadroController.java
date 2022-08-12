@@ -19,8 +19,16 @@ import java.util.ArrayList;
 @RequestMapping("/usuario/dashboard")
 public class QuadroController {
     @RequestMapping("")
-    public RedirectView get(HttpSession session, RedirectAttributes attributes) {
-        Usuario usuario = (Usuario)session.getAttribute("usuario_logado");
+    public RedirectView get(
+            Model model,
+            HttpSession session,
+            RedirectAttributes attributes) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario_logado");
+        if (usuario == null)
+            if (usuario == null) {
+                model.addAttribute("usuario", new Usuario());
+                return new RedirectView("/login", true);
+            };
         QuadroService qs = new QuadroService();
         ArrayList<Quadro> quadros = null;
         try {
@@ -33,8 +41,17 @@ public class QuadroController {
     }
 
     @PostMapping("quadros/novo")
-    public RedirectView post(HttpSession session, @ModelAttribute("quadro") Quadro novo_quadro, RedirectAttributes attributes) {
-        Usuario usuario = (Usuario)session.getAttribute("usuario_logado");
+    public RedirectView post(
+            Model model,
+            HttpSession session,
+            @ModelAttribute("quadro") Quadro novo_quadro,
+            RedirectAttributes attributes) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario_logado");
+        if (usuario == null)
+            if (usuario == null) {
+                model.addAttribute("usuario", new Usuario());
+                return new RedirectView("/login", true);
+            };
         String url = "/usuario/dashboard";
         QuadrosDAO qdr_dao = new QuadrosDAO();
         novo_quadro.setUsuario(usuario);
@@ -62,8 +79,18 @@ public class QuadroController {
     }
 
     @PostMapping("quadros/editar/{id}")
-    public RedirectView put(HttpSession session, @PathVariable("id") int id, @ModelAttribute("quadro") Quadro quadro, RedirectAttributes attributes) {
-        Usuario usuario = (Usuario)session.getAttribute("usuario_logado");
+    public RedirectView put(
+            Model model,
+            HttpSession session,
+            @PathVariable("id") int id,
+            @ModelAttribute("quadro") Quadro quadro,
+            RedirectAttributes attributes) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario_logado");
+        if (usuario == null)
+            if (usuario == null) {
+                model.addAttribute("usuario", new Usuario());
+                return new RedirectView("/login", true);
+            };
         String url = "/usuario/dashboard";
         QuadroService service = new QuadroService();
         try {
@@ -82,8 +109,17 @@ public class QuadroController {
     }
 
     @RequestMapping("quadros/remover/{id}")
-    public RedirectView delete(HttpSession session, RedirectAttributes attributes, @PathVariable("id") int id) {
-        Usuario usuario = (Usuario)session.getAttribute("usuario_logado");
+    public RedirectView delete(
+            Model model,
+            HttpSession session,
+            RedirectAttributes attributes,
+            @PathVariable("id") int id) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario_logado");
+        if (usuario == null)
+            if (usuario == null) {
+                model.addAttribute("usuario", new Usuario());
+                return new RedirectView("/login", true);
+            };
         QuadroService service = new QuadroService();
         Boolean deleted = false;
         try {
@@ -99,8 +135,16 @@ public class QuadroController {
     }
 
     @RequestMapping("quadros/ver/{id}")
-    public String show(HttpSession session, @PathVariable("id") int id, Model model) {
-        Usuario usuario = (Usuario)session.getAttribute("usuario_logado");
+    public String show(
+            HttpSession session,
+            @PathVariable("id") int id,
+            Model model) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario_logado");
+        if (usuario == null)
+            if (usuario == null) {
+                model.addAttribute("usuario", new Usuario());
+                return "login";
+            };
         QuadroService service = new QuadroService();
         Quadro quadro = null;
         try {
@@ -119,14 +163,30 @@ public class QuadroController {
     }
 
     @RequestMapping("quadros/novo")
-    public String novo(Model model) {
+    public String novo(
+            HttpSession session,
+            Model model) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario_logado");
+        if (usuario == null)
+            if (usuario == null) {
+                model.addAttribute("usuario", new Usuario());
+                return "login";
+            };
         model.addAttribute("quadro", new Quadro());
         return "novo_quadro";
     }
 
     @RequestMapping("quadros/editar/{id}")
-    public String editar(HttpSession session, @PathVariable("id") int id, Model model) {
-        Usuario usuario = (Usuario)session.getAttribute("usuario_logado");
+    public String editar(
+            HttpSession session,
+            @PathVariable("id") int id,
+            Model model) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario_logado");
+        if (usuario == null)
+            if (usuario == null) {
+                model.addAttribute("usuario", new Usuario());
+                return "login";
+            };
         QuadroService service = new QuadroService();
         Quadro quadro = null;
         try {

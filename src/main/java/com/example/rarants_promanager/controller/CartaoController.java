@@ -30,6 +30,10 @@ public class CartaoController {
                        @PathVariable("idQuadro") int idQuadro,
                        @PathVariable("idColuna") int idColuna,  Model model) {
         Usuario usuario = (Usuario) session.getAttribute("usuario_logado");
+        if (usuario == null) {
+            model.addAttribute("usuario", new Usuario());
+            return "login";
+        }
         QuadroService service = new QuadroService();
         ColunaService colunaService = new ColunaService();
         Quadro quadro = null;
@@ -54,6 +58,7 @@ public class CartaoController {
                          @PathVariable("idColuna") int idColuna,
                          @PathVariable("idCartao") int idCartao, Model model) {
         Usuario usuario = (Usuario) session.getAttribute("usuario_logado");
+        if (usuario == null) return "login";
         QuadroService service = new QuadroService();
         ColunaService colunaService = new ColunaService();
         Quadro quadro = null;
@@ -86,17 +91,23 @@ public class CartaoController {
     }
 
     @PostMapping("/quadro/{idQuadro}/coluna/{idColuna}/cartao/{idCartao}/salvar")
-    public RedirectView put(RedirectAttributes attributes,
+    public RedirectView put(Model model,
+                            HttpSession session,
+                            RedirectAttributes attributes,
                             @ModelAttribute("cartao") Cartao cartao,
                             @PathVariable("idQuadro") int idQuadro,
                             @PathVariable("idColuna") int idColuna ,
                             @PathVariable("idCartao") int idCartao) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario_logado");
+        if (usuario == null)
+            if (usuario == null) {
+                model.addAttribute("usuario", new Usuario());
+                return new RedirectView("/login", true);
+            };
         String url = "/usuario/dashboard/quadros/ver/" + idQuadro;
         Cartao cartao_atualizado = new Cartao();
         CartoesDAO dao = new CartoesDAO();
         cartao.setId(idCartao);
-        System.out.println(cartao.getDataInicio());
-        System.out.println(cartao.getDataTermino());
         Date dataInicio = null, dataTermino = null;
         if (cartao.getDataInicio() != null && !cartao.getDataInicio().equals("")) {
             dataInicio =  cartao.getDataInicio();
@@ -108,8 +119,6 @@ public class CartaoController {
         cartao.setDataTermino(dataTermino);
         try {
             cartao_atualizado = dao.putCartao(cartao);
-            System.out.println(cartao_atualizado.getDataInicio());
-            System.out.println(cartao_atualizado.getDataTermino());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -122,11 +131,18 @@ public class CartaoController {
     }
 
     @PostMapping("/quadro/{idQuadro}/coluna/{idColuna}/cartao/novo")
-    public RedirectView post(HttpSession session, RedirectAttributes attributes,
+    public RedirectView post(Model model,
+                             HttpSession session,
+                             RedirectAttributes attributes,
                              @ModelAttribute("cartao") Cartao novo_cartao,
                              @PathVariable("idQuadro") int idQuadro,
                              @PathVariable("idColuna") int idColuna) {
         Usuario usuario = (Usuario)session.getAttribute("usuario_logado");
+        if (usuario == null)
+            if (usuario == null) {
+                model.addAttribute("usuario", new Usuario());
+                return new RedirectView("/login", true);
+            };
         String url = "/usuario/dashboard/quadros/ver/" + idQuadro;
         CartoesDAO dao = new CartoesDAO();
         Quadro quadro = new Quadro();
@@ -161,11 +177,19 @@ public class CartaoController {
     }
 
     @RequestMapping("/quadro/{idQuadro}/coluna/{idColuna}/cartao/{idCartao}/remover")
-    public RedirectView delete(RedirectAttributes attributes,
+    public RedirectView delete(Model model,
+                               HttpSession session,
+                               RedirectAttributes attributes,
                                @ModelAttribute("cartao") Cartao cartao,
                                @PathVariable("idQuadro") int idQuadro,
                                @PathVariable("idColuna") int idColuna,
                                @PathVariable("idCartao") int idCartao) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario_logado");
+        if (usuario == null)
+            if (usuario == null) {
+                model.addAttribute("usuario", new Usuario());
+                return new RedirectView("/login", true);
+            };
         String url = "/usuario/dashboard/quadros/ver/" + idQuadro;
         Boolean deleted = false;
         CartoesDAO dao = new CartoesDAO();

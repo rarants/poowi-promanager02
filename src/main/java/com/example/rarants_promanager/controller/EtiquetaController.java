@@ -1,8 +1,10 @@
 package com.example.rarants_promanager.controller;
 
 import com.example.rarants_promanager.dao.ColunasDAO;
+import com.example.rarants_promanager.dao.EtiquetasDAO;
 import com.example.rarants_promanager.dao.QuadrosDAO;
 import com.example.rarants_promanager.model.Coluna;
+import com.example.rarants_promanager.model.Etiqueta;
 import com.example.rarants_promanager.model.Quadro;
 import com.example.rarants_promanager.model.Usuario;
 import com.example.rarants_promanager.service.QuadroService;
@@ -15,15 +17,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping("/usuario/colunas")
-public class ColunaController {
-    @RequestMapping("/quadro/{idQuadro}/coluna/nova")
+@RequestMapping("/usuario/etiquetas")
+public class EtiquetaController {
+    @RequestMapping("/quadro/{idQuadro}/etiquetas")
+    public String get(
+            @PathVariable("idQuadro") int idQuadro,
+            Model model,
+            HttpSession session) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario_logado");
+        if (usuario == null)
+            if (usuario == null) {
+                model.addAttribute("usuario", new Usuario());
+                return "login";
+            };
+        QuadroService service = new QuadroService();
+        Quadro quadro = null;
+        try {
+            quadro = service.getQuadro(idQuadro, usuario);
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        quadro.setUsuario(usuario);
+        model.addAttribute("quadro", quadro);
+        return "etiquetas";
+    }
+
+    @RequestMapping("/quadro/{idQuadro}/etiqueta/nova")
     public String nova(
             HttpSession session,
             @PathVariable("idQuadro") int idQuadro,
@@ -44,15 +68,15 @@ public class ColunaController {
         quadro.setUsuario(usuario);
 
         model.addAttribute("quadro", quadro);
-        model.addAttribute("coluna", new Coluna());
-        return "nova_coluna";
+        model.addAttribute("etiqueta", new Etiqueta());
+        return "nova_etiqueta";
     }
 
-    @RequestMapping("/quadro/{idQuadro}/coluna/{idColuna}/editar")
+    @RequestMapping("/quadro/{idQuadro}/etiqueta/{idEtiqueta}/editar")
     public String editar(
             HttpSession session,
             @PathVariable("idQuadro") int idQuadro,
-            @PathVariable("idColuna") int idColuna,
+            @PathVariable("idEtiqueta") int idEtiqueta,
             Model model) {
         Usuario usuario = (Usuario) session.getAttribute("usuario_logado");
         if (usuario == null)
@@ -69,31 +93,31 @@ public class ColunaController {
         }
         quadro.setUsuario(usuario);
 
-        Coluna coluna = new Coluna();
-        coluna.setId(idColuna);
-        ColunasDAO dao = new ColunasDAO();
+        Etiqueta etiqueta = new Etiqueta();
+        etiqueta.setId(idEtiqueta);
+        EtiquetasDAO dao = new EtiquetasDAO();
 
         try {
-            coluna = dao.getColuna(coluna);
+            etiqueta = dao.getEtiqueta(etiqueta);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        coluna.setQuadro(quadro);
+        etiqueta.setQuadro(quadro);
 
         model.addAttribute("quadro", quadro);
-        model.addAttribute("coluna", coluna);
-        return "editar_coluna";
+        model.addAttribute("etiqueta", etiqueta);
+        return "editar_etiqueta";
     }
 
-    @PostMapping("/quadro/{idQuadro}/coluna/{idColuna}/salvar")
+    @PostMapping("/quadro/{idQuadro}/etiqueta/{idEtiqueta}/salvar")
     public RedirectView put(
             Model model,
             HttpSession session,
             RedirectAttributes attributes,
-            @ModelAttribute("coluna") Coluna coluna,
+            @ModelAttribute("etiqueta") Etiqueta etiqueta,
             @PathVariable("idQuadro") int idQuadro,
-            @PathVariable("idColuna") int idColuna) {
+            @PathVariable("idEtiqueta") int idEtiqueta) {
         Usuario usuario = (Usuario) session.getAttribute("usuario_logado");
         if (usuario == null)
             if (usuario == null) {
@@ -101,28 +125,28 @@ public class ColunaController {
                 return new RedirectView("/login", true);
             };
         String url = "/usuario/dashboard/quadros/ver/" + idQuadro;
-        Coluna coluna_atualizada = new Coluna();
-        ColunasDAO dao = new ColunasDAO();
-        coluna.setId(idColuna);
+        Etiqueta etiqueta_atualizada = new Etiqueta();
+        EtiquetasDAO dao = new EtiquetasDAO();
+        etiqueta.setId(idEtiqueta);
         try {
-            coluna_atualizada = dao.putColuna(coluna);
+            etiqueta_atualizada = dao.putEtiqueta(etiqueta);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        if (coluna_atualizada == null) {
+        if (etiqueta_atualizada == null) {
             attributes.addAttribute("error", "Erro ao salvar alterações!");
-            url = "/colunas/quadro/" + idQuadro + "/coluna/" + idColuna + "/editar";
+            url = "/etiquetas/quadro/" + idQuadro + "/etiqueta/" + idEtiqueta + "/editar";
         }
         RedirectView redirect = new RedirectView(url, true);
         return redirect;
     }
 
-    @PostMapping("/quadro/{idQuadro}/coluna/nova")
+    @PostMapping("/quadro/{idQuadro}/etiqueta/nova")
     public RedirectView post(
             Model model,
             HttpSession session,
             RedirectAttributes attributes,
-            @ModelAttribute("coluna") Coluna nova_coluna,
+            @ModelAttribute("etiqueta") Etiqueta nova_etiqueta,
             @PathVariable("idQuadro") int idQuadro) {
         Usuario usuario = (Usuario) session.getAttribute("usuario_logado");
         if (usuario == null)
@@ -131,16 +155,16 @@ public class ColunaController {
                 return new RedirectView("/login", true);
             };
         String url = "/usuario/dashboard/quadros/ver/" + idQuadro;
-        ColunasDAO dao = new ColunasDAO();
+        EtiquetasDAO dao = new EtiquetasDAO();
         Quadro quadro = new Quadro();
         quadro.setId(idQuadro);
-        nova_coluna.setQuadro(quadro);
+        nova_etiqueta.setQuadro(quadro);
         try {
-            nova_coluna = dao.postColuna(nova_coluna);
+            nova_etiqueta = dao.postEtiqueta(nova_etiqueta);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        if (nova_coluna != null) {
+        if (nova_etiqueta != null) {
             ArrayList<Quadro> quadros = null;
             try {
                 quadros = new QuadroService().getQuadros(usuario);
@@ -151,21 +175,21 @@ public class ColunaController {
             }
             attributes.addFlashAttribute("quadros", quadros);
         } else {
-            attributes.addAttribute("error", "Erro ao cadastrar o quadro!");
-            url = "/usuario/colunas/quadro/" + idQuadro + "/coluna/nova";
+            attributes.addAttribute("error", "Erro ao cadastrar a etiqueta!");
+            url = "/usuario/etiquetas/quadro/" + idQuadro + "/etiqueta/nova";
         }
         RedirectView redirect = new RedirectView(url, true);
         return redirect;
     }
 
-    @RequestMapping("/quadro/{idQuadro}/coluna/{idColuna}/remover")
+    @RequestMapping("/quadro/{idQuadro}/etiqueta/{idEtiqueta}/remover")
     public RedirectView delete(
             Model model,
             HttpSession session,
             RedirectAttributes attributes,
-            @ModelAttribute("coluna") Coluna coluna,
+            @ModelAttribute("etiqueta") Etiqueta etiqueta,
             @PathVariable("idQuadro") int idQuadro,
-            @PathVariable("idColuna") int idColuna) {
+            @PathVariable("idEtiqueta") int idEtiqueta) {
         Usuario usuario = (Usuario) session.getAttribute("usuario_logado");
         if (usuario == null)
             if (usuario == null) {
@@ -174,16 +198,16 @@ public class ColunaController {
             };
         String url = "/usuario/dashboard/quadros/ver/" + idQuadro;
         Boolean deleted = false;
-        ColunasDAO dao = new ColunasDAO();
-        coluna.setId(idColuna);
+        EtiquetasDAO dao = new EtiquetasDAO();
+        etiqueta.setId(idEtiqueta);
         try {
-            deleted = dao.deleteColuna(coluna.getId());
+            deleted = dao.deleteEtiqueta(etiqueta.getId());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         if (deleted == false) {
-            attributes.addAttribute("error", "Erro ao remover a coluna!");
-            url = "/colunas/quadro/" + idQuadro + "/coluna/" + idColuna + "/editar";
+            attributes.addAttribute("error", "Erro ao remover a etiqueta!");
+            url = "/etiquetas/quadro/" + idQuadro + "/etiqueta/" + idEtiqueta + "/editar";
         }
         RedirectView redirect = new RedirectView(url, true);
         return redirect;

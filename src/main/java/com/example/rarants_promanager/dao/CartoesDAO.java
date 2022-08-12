@@ -39,7 +39,6 @@ public class CartoesDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         Coluna coluna = cartao.getColuna();
-        System.out.println("POST -->" + cartao.toString());
         try (Connection con = Conexao.getConnection()) {
             stmt = con.prepareStatement("INSERT INTO cartoes VALUES (DEFAULT, ?, ?, DEFAULT, ?, ?, DEFAULT, ?, ?)");
             stmt.setString(1, cartao.getTitulo());
