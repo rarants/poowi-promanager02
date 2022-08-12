@@ -1,14 +1,18 @@
 package com.example.rarants_promanager.controller;
 
 import com.example.rarants_promanager.dao.QuadrosDAO;
+import com.example.rarants_promanager.dao.UsuarioDAO;
 import com.example.rarants_promanager.model.Quadro;
 import com.example.rarants_promanager.model.Usuario;
+import com.example.rarants_promanager.service.QuadroService;
 import com.example.rarants_promanager.service.UsuarioService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.RequestDispatcher;
@@ -23,6 +27,12 @@ public class LoginController {
     public String login(Model model) {
         model.addAttribute("usuario", new Usuario());
         return "login";
+    }
+
+    @GetMapping("/cadastrar")
+    public String cadastrar(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        return "cadastrar";
     }
 
     @RequestMapping("/sign-in")
@@ -50,4 +60,23 @@ public class LoginController {
         model.addAttribute("usuario", new Usuario());
         return new RedirectView("/login", true);
     }
+    @PostMapping("/register")
+    public RedirectView post(@ModelAttribute("usuario") Usuario usuario, RedirectAttributes attributes) {
+        boolean registered = false;
+        String url = "/login/register";
+        try {
+            UsuarioDAO dao = new UsuarioDAO();
+            registered = dao.postUsuario(usuario);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (registered == true) {
+            url = "/login";
+        } else {
+            attributes.addAttribute("error", "Erro ao cadastrar o quadro!");
+        }
+        RedirectView redirect = new RedirectView(url, true);
+        return redirect;
+    }
+
 }

@@ -11,7 +11,7 @@
 <%@page isELIgnored="false" %>
 <html>
 <head>
-    <title>Login</title>
+    <title>Cadastrar</title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
@@ -20,24 +20,28 @@
 <body>
     <div class="p-4">
         <div class="text-center">
-            <h1>Início</h1>
+            <h1>Cadastrar</h1>
             <p>
                 Bem-vindo ao ProManager! Aqui você pode gerenciar suas atividades diárias e realizar
-                planejamento de tarefas e projetos. Faça o login e comece a usar! Ou então, cadastre-se!
+                planejamento de tarefas e projetos. Ainda não possui cadasrto? Preencha o formulário abaixo!
             </p>
         </div>
         <div class="mx-auto card p-4" style="width: 25rem;">
             <%--@elvariable id="usuario" type="com.example.rarants_promanager.model.Usuario"--%>
-            <form:form method="POST" action="/promanager/login/sign-in" modelAttribute="usuario" >
+            <form:form method="POST" action="/promanager/login/register" modelAttribute="usuario" >
                 <div class="card-title text-center h3">Login</div>
                 <div class="row text-left">
                     <div class="col-12 mb-3">
+                        <form:label path="nome" for="nome" class="form-label">Nome</form:label>
+                        <form:input path="nome" type="nome" class="form-control" placeholder="Informe seu nome" required="required" />
+                    </div>
+                    <div class="col-12 mb-3">
                         <form:label path="email" for="email" class="form-label">Email</form:label>
-                        <form:input path="email" type="email" class="form-control" placeholder="Informe seu email" />
+                        <form:input path="email" type="email" class="form-control" placeholder="Informe seu email" required="required" />
                     </div>
                     <div class="col-12 mb-3">
                         <form:label path="senha" for="senha" class="form-label">Senha</form:label>
-                        <form:input path="senha" type="password" class="form-control" placeholder="Digite sua senha" />
+                        <form:input path="senha" type="password" class="form-control" placeholder="Digite sua senha" required="required" />
                     </div>
                     <div class="text-center">
                         <div class="row">
@@ -49,11 +53,11 @@
                         </div>
                         <div class="row">
                             <div>
-                                <input type="submit" value="Login" name="login" class="btn btn-primary btn-sm mb-3"/>
+                                <input type="submit" value="Cadastrar-se" name="register" class="btn btn-primary btn-sm mb-3"/>
                             </div>
                         </div>
                         <div class="row">
-                            <a href="/promanager/login/cadastrar" class="mb-3">Ainda não possui cadastro?</a>
+                            <a href="/promanager/login" class="mb-3">Já possui cadastro?</a>
                         </div>
                     </div>
                 </div>
