@@ -16,6 +16,37 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background: rgb(0,83,110);
+            background: linear-gradient(7deg, rgba(0,83,110,1) 0%, rgba(0,37,48,1) 100%);
+            height: 100%;
+            margin: 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        html, body { height: 100%; }
+        body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+        .card {
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: .5s;
+        }
+        .btn {
+            transition: .5s;
+            border-radius: 15px;
+            padding-inline: 1.2rem;
+        }
+        .btn:hover {
+            transition: .5s;
+            transform: translateY(-3px);
+        }
+        .alert {
+            margin: auto;
+            width: 40%;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar bg-dark text-white">
@@ -33,7 +64,7 @@
         </div>
     </nav>
     <div class="p-4">
-        <div class="text-center">
+        <div class="text-center text-white text-primary">
             <h1>Editar quadro <span class="text-primary">${quadro.titulo}</span></h1>
             <p>
                 Preencha as informações abaixo
