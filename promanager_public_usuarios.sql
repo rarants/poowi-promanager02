@@ -1,0 +1,2 @@
+INSERT INTO public.usuarios (id, nome, email, senha, ativo) VALUES (1, 'RaÃ­ssa Arantes', 'raissa@mail.com', '123456', true);
+INSERT INTO public.usuarios (id, nome, email, senha, ativo) VALUES (3, 'Adrian Souza', 'adrian@mail.com', '123456', true);

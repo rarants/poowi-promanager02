@@ -8,23 +8,29 @@ import com.example.rarants_promanager.model.Quadro;
 import com.example.rarants_promanager.model.Usuario;
 import com.example.rarants_promanager.service.ColunaService;
 import com.example.rarants_promanager.service.QuadroService;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/usuario/colunas")
 public class CartaoController {
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
+        binder.registerCustomEditor(Date.class, editor);
+    }
+
     @RequestMapping("/quadro/{idQuadro}/coluna/{idColuna}/cartao/novo")
     public String novo(HttpSession session,
                        @PathVariable("idQuadro") int idQuadro,
@@ -151,18 +157,6 @@ public class CartaoController {
         coluna.setId(idColuna);
         coluna.setQuadro(quadro);
         novo_cartao.setColuna(coluna);
-
-        Date dataInicio = null, dataTermino = null;
-        if (novo_cartao.getDataInicio() != null && !novo_cartao.getDataInicio().equals("")) {
-            dataInicio = novo_cartao.getDataInicio();
-        }
-        if (novo_cartao.getDataTermino() != null && !novo_cartao.getDataTermino().equals("")) {
-            dataTermino = novo_cartao.getDataTermino();
-        }
-        novo_cartao.setDataInicio(dataInicio);
-        novo_cartao.setDataTermino(dataTermino);
-
-
         try {
             novo_cartao = dao.postCartao(novo_cartao);
         } catch (ClassNotFoundException e) {

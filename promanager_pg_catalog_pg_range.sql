@@ -1,0 +1,6 @@
+INSERT INTO pg_catalog.pg_range (rngtypid, rngsubtype, rngmultitypid, rngcollation, rngsubopc, rngcanonical, rngsubdiff) VALUES (3904, 23, 4451, 0, 1978, int4range_canonical, int4range_subdiff);
+INSERT INTO pg_catalog.pg_range (rngtypid, rngsubtype, rngmultitypid, rngcollation, rngsubopc, rngcanonical, rngsubdiff) VALUES (3906, 1700, 4532, 0, 3125, -, numrange_subdiff);
+INSERT INTO pg_catalog.pg_range (rngtypid, rngsubtype, rngmultitypid, rngcollation, rngsubopc, rngcanonical, rngsubdiff) VALUES (3908, 1114, 4533, 0, 3128, -, tsrange_subdiff);
+INSERT INTO pg_catalog.pg_range (rngtypid, rngsubtype, rngmultitypid, rngcollation, rngsubopc, rngcanonical, rngsubdiff) VALUES (3910, 1184, 4534, 0, 3127, -, tstzrange_subdiff);
+INSERT INTO pg_catalog.pg_range (rngtypid, rngsubtype, rngmultitypid, rngcollation, rngsubopc, rngcanonical, rngsubdiff) VALUES (3912, 1082, 4535, 0, 3122, daterange_canonical, daterange_subdiff);
+INSERT INTO pg_catalog.pg_range (rngtypid, rngsubtype, rngmultitypid, rngcollation, rngsubopc, rngcanonical, rngsubdiff) VALUES (3926, 20, 4536, 0, 3124, int8range_canonical, int8range_subdiff);

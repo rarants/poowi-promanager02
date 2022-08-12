@@ -1,0 +1,1 @@
+INSERT INTO pg_catalog.pg_shadow (usename, usesysid, usecreatedb, usesuper, userepl, usebypassrls, passwd, valuntil, useconfig) VALUES ('postgres', 10, true, true, true, true, 'SCRAM-SHA-256$4096:QzzdRWgxnaHdmj4b94Ka9w==$e88qE0WKvxG27eDa/dk0aq4xvEYk+ixAJ0NG0p8A/MI=:sXttT8IUhpnetCBUzi+zEM9dO9BLzhbZLePazZSil0k=', null, null);

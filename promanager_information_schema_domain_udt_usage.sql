@@ -1,0 +1,5 @@
+INSERT INTO information_schema.domain_udt_usage (udt_catalog, udt_schema, udt_name, domain_catalog, domain_schema, domain_name) VALUES ('promanager', 'pg_catalog', 'name', 'promanager', 'information_schema', 'sql_identifier');
+INSERT INTO information_schema.domain_udt_usage (udt_catalog, udt_schema, udt_name, domain_catalog, domain_schema, domain_name) VALUES ('promanager', 'pg_catalog', 'int4', 'promanager', 'information_schema', 'cardinal_number');
+INSERT INTO information_schema.domain_udt_usage (udt_catalog, udt_schema, udt_name, domain_catalog, domain_schema, domain_name) VALUES ('promanager', 'pg_catalog', 'varchar', 'promanager', 'information_schema', 'character_data');
+INSERT INTO information_schema.domain_udt_usage (udt_catalog, udt_schema, udt_name, domain_catalog, domain_schema, domain_name) VALUES ('promanager', 'pg_catalog', 'varchar', 'promanager', 'information_schema', 'yes_or_no');
+INSERT INTO information_schema.domain_udt_usage (udt_catalog, udt_schema, udt_name, domain_catalog, domain_schema, domain_name) VALUES ('promanager', 'pg_catalog', 'timestamptz', 'promanager', 'information_schema', 'time_stamp');

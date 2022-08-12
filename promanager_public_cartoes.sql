@@ -1,0 +1,7 @@
+INSERT INTO public.cartoes (id, titulo, status, ordem, data_inicio, data_termino, data_atualizacao, id_coluna, descricao) VALUES (4, 'CartÃ£o 2', false, null, null, null, '2022-06-22', 2, '');
+INSERT INTO public.cartoes (id, titulo, status, ordem, data_inicio, data_termino, data_atualizacao, id_coluna, descricao) VALUES (5, 'CartÃ£o 1 da coluna 3', false, null, null, null, '2022-06-22', 3, '');
+INSERT INTO public.cartoes (id, titulo, status, ordem, data_inicio, data_termino, data_atualizacao, id_coluna, descricao) VALUES (2, 'CartÃÂ£o 1 da coluna 2 :)', true, null, null, null, '2022-06-22', 2, 'descriÃ§Ã£o');
+INSERT INTO public.cartoes (id, titulo, status, ordem, data_inicio, data_termino, data_atualizacao, id_coluna, descricao) VALUES (6, 'AlmoÃ§ar', false, null, null, null, '2022-06-22', 8, '');
+INSERT INTO public.cartoes (id, titulo, status, ordem, data_inicio, data_termino, data_atualizacao, id_coluna, descricao) VALUES (8, 'ttttt', true, null, '2022-06-21', '2022-06-29', '2022-06-22', 8, '');
+INSERT INTO public.cartoes (id, titulo, status, ordem, data_inicio, data_termino, data_atualizacao, id_coluna, descricao) VALUES (7, 'teste data', true, null, '2022-06-13', null, '2022-06-22', 8, '');
+INSERT INTO public.cartoes (id, titulo, status, ordem, data_inicio, data_termino, data_atualizacao, id_coluna, descricao) VALUES (10, 'Cartão 1 da coluna 1', true, null, '2022-08-12', '2022-08-16', '2022-08-11', 13, 'aaaaaaaaaaaaaaaaa');

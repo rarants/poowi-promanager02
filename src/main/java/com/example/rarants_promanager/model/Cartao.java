@@ -1,5 +1,7 @@
 package com.example.rarants_promanager.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Date;
 import java.util.List;
 
@@ -9,7 +11,9 @@ public class Cartao {
     private String descricao;
     private Boolean status;
     private Integer ordem;
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataInicio;
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataTermino;
     private Date dataUpdate;
     private Coluna coluna;

@@ -1,0 +1,6 @@
+INSERT INTO pg_catalog.pg_stat_user_indexes (relid, indexrelid, schemaname, relname, indexrelname, idx_scan, idx_tup_read, idx_tup_fetch) VALUES (16526, 16531, 'public', 'usuarios', 'usuarios_pkey', 0, 0, 0);
+INSERT INTO pg_catalog.pg_stat_user_indexes (relid, indexrelid, schemaname, relname, indexrelname, idx_scan, idx_tup_read, idx_tup_fetch) VALUES (16534, 16541, 'public', 'quadros', 'quadros_pkey', 88, 88, 86);
+INSERT INTO pg_catalog.pg_stat_user_indexes (relid, indexrelid, schemaname, relname, indexrelname, idx_scan, idx_tup_read, idx_tup_fetch) VALUES (16549, 16553, 'public', 'colunas', 'colunas_pkey', 13, 13, 13);
+INSERT INTO pg_catalog.pg_stat_user_indexes (relid, indexrelid, schemaname, relname, indexrelname, idx_scan, idx_tup_read, idx_tup_fetch) VALUES (16561, 16567, 'public', 'cartoes', 'cartoes_pkey', 5, 5, 5);
+INSERT INTO pg_catalog.pg_stat_user_indexes (relid, indexrelid, schemaname, relname, indexrelname, idx_scan, idx_tup_read, idx_tup_fetch) VALUES (16575, 16580, 'public', 'etiquetas', 'etiquetas_pkey', 0, 0, 0);
+INSERT INTO pg_catalog.pg_stat_user_indexes (relid, indexrelid, schemaname, relname, indexrelname, idx_scan, idx_tup_read, idx_tup_fetch) VALUES (16588, 16592, 'public', 'cartao_etiquetas', 'cartao_etiquetas_pkey', 0, 0, 0);

@@ -1,0 +1,6 @@
+INSERT INTO pg_catalog.pg_statio_user_indexes (relid, indexrelid, schemaname, relname, indexrelname, idx_blks_read, idx_blks_hit) VALUES (16526, 16531, 'public', 'usuarios', 'usuarios_pkey', 2, 23);
+INSERT INTO pg_catalog.pg_statio_user_indexes (relid, indexrelid, schemaname, relname, indexrelname, idx_blks_read, idx_blks_hit) VALUES (16534, 16541, 'public', 'quadros', 'quadros_pkey', 2, 209);
+INSERT INTO pg_catalog.pg_statio_user_indexes (relid, indexrelid, schemaname, relname, indexrelname, idx_blks_read, idx_blks_hit) VALUES (16549, 16553, 'public', 'colunas', 'colunas_pkey', 2, 109);
+INSERT INTO pg_catalog.pg_statio_user_indexes (relid, indexrelid, schemaname, relname, indexrelname, idx_blks_read, idx_blks_hit) VALUES (16561, 16567, 'public', 'cartoes', 'cartoes_pkey', 2, 92);
+INSERT INTO pg_catalog.pg_statio_user_indexes (relid, indexrelid, schemaname, relname, indexrelname, idx_blks_read, idx_blks_hit) VALUES (16575, 16580, 'public', 'etiquetas', 'etiquetas_pkey', 2, 1);
+INSERT INTO pg_catalog.pg_statio_user_indexes (relid, indexrelid, schemaname, relname, indexrelname, idx_blks_read, idx_blks_hit) VALUES (16588, 16592, 'public', 'cartao_etiquetas', 'cartao_etiquetas_pkey', 0, 0);

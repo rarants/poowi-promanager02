@@ -1,0 +1,1 @@
+INSERT INTO public.etiquetas (id, titulo, cor, id_quadro) VALUES (1, 'aEtiqueta', 'azul', 19);
