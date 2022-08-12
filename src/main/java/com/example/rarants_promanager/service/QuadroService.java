@@ -18,7 +18,8 @@ public class QuadroService {
         quadro.setId(id);
         quadro.setUsuario(usuario);
         Quadro qdr = dao.getQuadro(quadro);
-        if (qdr.getUsuario().equals(usuario)) {
+        if ((qdr != null && qdr.getUsuario() != null && qdr.getUsuario().equals(usuario)) ||
+                (qdr != null && usuario == null && qdr.getPublico() == true)) {
             return qdr;
         } else return null;
     }

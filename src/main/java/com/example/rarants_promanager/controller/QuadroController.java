@@ -140,20 +140,23 @@ public class QuadroController {
             @PathVariable("id") int id,
             Model model) {
         Usuario usuario = (Usuario) session.getAttribute("usuario_logado");
-        if (usuario == null)
-            if (usuario == null) {
-                model.addAttribute("usuario", new Usuario());
-                return "login";
-            };
         QuadroService service = new QuadroService();
         Quadro quadro = null;
         try {
             quadro = service.getQuadro(id, usuario);
+            System.out.println("quadro");
+            System.out.println(quadro);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        if (quadro == null ||
+                (usuario == null && (quadro.getPublico() == null || quadro.getPublico() == false))) {
+            model.addAttribute("usuario", new Usuario());
+            return "login";
+        };
         quadro.setUsuario(usuario);
         model.addAttribute("quadro", quadro);
+        model.addAttribute("usuario", usuario);
         return "quadro";
     }
 

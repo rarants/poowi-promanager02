@@ -75,8 +75,9 @@ public class QuadrosDAO {
 
     public Quadro getQuadro(Quadro quadro) throws SQLException, ClassNotFoundException {
         Usuario usuario = quadro.getUsuario();
+        if (usuario == null) usuario = new Usuario();
         Quadro new_quadro = new Quadro();
-        String sql = "SELECT q.descricao quadro_descricao, q.titulo quadro_titulo, " +
+        String sql = "SELECT publico, q.id_usuario q_id_usuario, q.descricao quadro_descricao, q.titulo quadro_titulo, " +
                 "cl.id id_coluna, cl.titulo coluna_titulo, " +
                 "ct.id id_cartao, ct.titulo cartao_titulo, ct.descricao cartao_descricao, status, " +
                 "data_inicio, data_termino, data_atualizacao " +
@@ -85,19 +86,20 @@ public class QuadrosDAO {
                 "LEFT JOIN cartoes ct " +
                 "ON cl.id = ct.id_coluna " +
                 "ON q.id = cl.id_quadro " +
-                "WHERE q.id = ? AND q.id_usuario = ? " +
+                "WHERE q.id = ? " +
                 "ORDER BY cl.id,  ct.id;";
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try (Connection con = Conexao.getConnection()) {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, quadro.getId());
-            stmt.setInt(2, usuario.getId());
             rs = stmt.executeQuery();
             ArrayList<Coluna> colunas = new ArrayList<Coluna>();
             while (rs.next()) {
                 new_quadro.setTitulo(rs.getString("quadro_titulo"));
                 new_quadro.setDescricao(rs.getString("quadro_descricao"));
+                new_quadro.setPublico(rs.getBoolean("publico"));
+                usuario.setId(rs.getInt("q_id_usuario"));
                 new_quadro.setUsuario(usuario);
                 new_quadro.setId(quadro.getId());
                 colunas = setColunaAndCartao(rs, quadro, colunas);
